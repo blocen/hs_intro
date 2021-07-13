@@ -45,6 +45,7 @@ fact n = if n <= 1 then 1 else n * fact (n - 1)
 -- fact n = n * fact (n-1)
 
 -- fib n
+-- ...
 fib :: Int -> Int
 fib 1 = 1
 fib 2 = 2
