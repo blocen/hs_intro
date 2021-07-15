@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-deferred-type-errors #-}
+
 -- Welcome to the first exercise set of the Haskell Mooc! Edit this
 -- file according to the instructions, and check your answers with
 --
@@ -32,7 +34,7 @@ two = 2
 -- should take one argument and return it multiplied by two.
 
 double :: Integer -> Integer
-double x = 2 * x
+double x = x * 2
 
 ------------------------------------------------------------------------------
 -- Ex 3: define the function quadruple that uses the function double
@@ -40,7 +42,7 @@ double x = 2 * x
 -- four.
 
 quadruple :: Integer -> Integer
-quadruple x = double (double x)
+quadruple x = double x * 2
 
 ------------------------------------------------------------------------------
 -- Ex 4: define the function distance. It should take four arguments of
@@ -56,8 +58,12 @@ quadruple x = double (double x)
 --   distance 0 0 1 1  ==>  1.4142135...
 --   distance 1 1 4 5  ==>  5.0
 
+-- distance :: (Double, Double) -> (Double, Double) -> Double
 distance :: Double -> Double -> Double -> Double -> Double
-distance x1 y1 x2 y2 = sqrt ((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
+distance x1 y1 x2 y2 = sqrt (x' * x' + y' * y')
+  where
+    x' = x2 - x1
+    y' = y2 - y1
 
 ------------------------------------------------------------------------------
 -- Ex 5: define the function eeny that returns "eeny" for even inputs
@@ -89,13 +95,17 @@ checkPassword password =
 -- in grams, and returns the cost in credits.
 
 postagePrice :: Int -> Int
-postagePrice weight =
-  if weight <= 500
-    then 250
-    else
-      if weight > 5000
-        then 6000
-        else 300 + weight
+-- postagePrice x =
+--     if x >= 5000 then 6000
+--     else if
+--         x <= 500 then 250
+--         else
+--             300 + x
+
+postagePrice x
+  | x > 5000 = 6000
+  | x <= 500 = 250
+  | otherwise = 300 + x
 
 ------------------------------------------------------------------------------
 -- Ex 8: define a function isZero that returns True if it is given an
@@ -115,16 +125,14 @@ isZero _ = False
 -- computes the sum 1+2+...+n
 
 sumTo :: Integer -> Integer
-sumTo 0 = 0
-sumTo n = n + sumTo (n -1)
+sumTo n = if n == 1 then 1 else n + sumTo (n - 1)
 
 ------------------------------------------------------------------------------
 -- Ex 10: power n k should compute n to the power k (i.e. n^k)
 -- Use recursion.
 
 power :: Integer -> Integer -> Integer
-power n 0 = 1
-power n k = n * power n (k -1)
+power n k = n ^ k
 
 ------------------------------------------------------------------------------
 -- Ex 11: ilog3 n should be the number of times you can divide given
@@ -143,5 +151,4 @@ power n k = n * power n (k -1)
 --   ilog3 7 ==> 2
 
 ilog3 :: Integer -> Integer
-ilog3 0 = 0
-ilog3 n = 1 + ilog3 (div n 3)
+ilog3 n = if div n 3 < 1 then 1 else ilog3 (div n 3) + 1
