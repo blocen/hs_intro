@@ -1,5 +1,4 @@
--- As you’ve seen above, tail 
--- recursion corresponds to loops.
+-- Tail recursion corresponds to loops.
 
 repeatString n str = repeatHelper n str ""
 

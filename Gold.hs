@@ -46,6 +46,14 @@ describe n
   | n>100     = "Big!!"
   | otherwise = "The number "++show n
 
+-- case expression
+describe :: Integer -> String
+describe n = case n of 0 -> "zero"
+                       1 -> "one"
+                       2 -> "an even prime"
+                       n -> "the number " ++ show n
+
+
 -- fact n
 fact :: Int -> Int
 fact n = if n <= 1 then 1 else n * fact (n - 1)
