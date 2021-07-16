@@ -1,3 +1,6 @@
+-- As you’ve seen above, tail 
+-- recursion corresponds to loops.
+
 repeatString n str = repeatHelper n str ""
 
 -- repeatHelper n str result =
@@ -7,6 +10,14 @@ repeatString n str = repeatHelper n str ""
 
 repeatHelper 0 _ result = result
 repeatHelper n str result = repeatHelper (n -1) str (result ++ str)
+
+-- 
+
+-- -- fib n
+-- fib :: Int -> Int
+-- fib 1 = 1
+-- fib 2 = 2
+-- fib n = fib (n - 2) + fib (n - 1)
 
 -- -- fibonacci numbers, fast version
 fib :: Integer -> Integer
