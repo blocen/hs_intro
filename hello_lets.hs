@@ -19,3 +19,4 @@ endpoints = lets
 mkSchemaDefinitions ''BlockchainActions
 
 $(mkKnownCurrencies [])
+
