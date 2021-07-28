@@ -10,6 +10,7 @@ addThree x = x + 3
 
 doTwice :: (a -> a) -> a -> a 
 doTwice f x = f (f x)
+-- or: doTwice f = f . f -- (function composition)
 -- doTwice addThree 1
 
 
@@ -28,5 +29,5 @@ countAWords :: String -> Int
 countAWords string = length (filter startsWithA (words string))
   where startsWithA s = head s == 'a'
 
-  
+
   
